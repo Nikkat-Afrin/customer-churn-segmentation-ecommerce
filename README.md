@@ -2,7 +2,7 @@
 
 **Segment 12,330 online shopping sessions into behavioral groups and predict which sessions will convert to a purchase — turning clickstream behavior into marketing-ready customer intelligence.**
 
-![Python](https://img.shields.io/badge/Python-3.12-blue) ![ML](https://img.shields.io/badge/ML-KMeans%20%7C%20KNN%20%7C%20RandomForest-orange) ![Data](https://img.shields.io/badge/UCI-Online%20Shoppers-green)
+![Python](https://img.shields.io/badge/Python-3.12-blue) ![ML](https://img.shields.io/badge/ML-KMeans%20%7C%20KNN%20%7C%20RandomForest-orange) ![Data](https://img.shields.io/badge/UCI-Online%20Shoppers-green) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
 
