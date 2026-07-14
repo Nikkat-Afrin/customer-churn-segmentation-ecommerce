@@ -22,3 +22,8 @@ desktop.ini
 *.log
 *.tmp
 reports/cache/
+models/*.joblib
+scored_sessions.csv
+__pycache__/
+*.pyc
+.pytest_cache/

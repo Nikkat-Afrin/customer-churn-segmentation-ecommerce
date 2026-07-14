@@ -2,7 +2,8 @@
 
 **Segment 12,330 online shopping sessions into behavioral groups and predict which sessions will convert to a purchase — turning clickstream behavior into marketing-ready customer intelligence.**
 
-![Python](https://img.shields.io/badge/Python-3.12-blue) ![ML](https://img.shields.io/badge/ML-KMeans%20%7C%20KNN%20%7C%20RandomForest-orange) ![Data](https://img.shields.io/badge/UCI-Online%20Shoppers-green) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![CI](https://github.com/Nikkat-Afrin/customer-churn-segmentation-ecommerce/actions/workflows/ci.yml/badge.svg)](https://github.com/Nikkat-Afrin/customer-churn-segmentation-ecommerce/actions/workflows/ci.yml) ![Python](https://img.shields.io/badge/Python-3.12-blue) ![ML](https://img.shields.io/badge/ML-KMeans%20%7C%20KNN%20%7C%20RandomForest-orange) ![Data](https://img.shields.io/badge/UCI-Online%20Shoppers-green)
+ [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
 
@@ -58,3 +59,19 @@ python src/segmentation_and_prediction.py               # segmentation + predict
 
 ---
 *Academic project (DAV 6150, Project 2), extended with silhouette-based segmentation and an imbalance-aware purchase-intent benchmark.*
+
+
+## 🏭 Production scoring pipeline
+
+Beyond the notebook analysis, the repo ships a deployable scoring pipeline:
+
+```bash
+python src/train_pipeline.py     # 5-fold CV (ROC-AUC ~0.93) -> models/purchase_intent_rf.joblib + reports/metrics.json
+python src/score.py data/Project2_Data.csv --out scored_sessions.csv
+pytest tests/                    # pipeline tests (run in CI on every push)
+```
+
+Design notes:
+- Preprocessing (scaling + one-hot encoding) lives **inside** a single sklearn `Pipeline`, so the persisted artifact can never drift from training-time preprocessing.
+- `OneHotEncoder(handle_unknown="ignore")` makes scoring robust to category levels that never appeared in training (verified by a test).
+- Metrics (CV + held-out test, including PR-AUC for the ~15% positive class) are written to `reports/metrics.json` on every training run.
