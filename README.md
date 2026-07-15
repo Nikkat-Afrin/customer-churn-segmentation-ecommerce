@@ -75,3 +75,8 @@ Design notes:
 - Preprocessing (scaling + one-hot encoding) lives **inside** a single sklearn `Pipeline`, so the persisted artifact can never drift from training-time preprocessing.
 - `OneHotEncoder(handle_unknown="ignore")` makes scoring robust to category levels that never appeared in training (verified by a test).
 - Metrics (CV + held-out test, including PR-AUC for the ~15% positive class) are written to `reports/metrics.json` on every training run.
+
+
+## 🕹️ Interactive dashboard
+
+**Live: <https://nikkat-afrin.github.io/customer-churn-segmentation-ecommerce/>** - K-Means segments in PCA space with per-segment conversion rates, plus a decision-threshold slider for the purchase-intent model (confusion matrix, precision/recall/F1 update live; all states precomputed, no server). Regenerate with `python src/build_dashboard.py`.
